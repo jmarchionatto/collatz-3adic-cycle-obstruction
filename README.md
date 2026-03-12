@@ -1,9 +1,19 @@
 # Collatz 3-adic Cycle Obstruction
 
-Repository accompanying the paper  
-"A Finite 3-Adic Obstruction to Odd Collatz Cycles"  
-Juan R. Marchionatto
+This repository contains the code accompanying the paper
 
+`A Finite 3-Adic Obstruction to Odd Collatz Cycles`.
+
+The scripts construct the finite directed graphs arising from the
+modular compatibility conditions in the paper and verify the structure
+of their strongly connected components.
+
+Repository structure:
+
+- `paper/` – manuscript source and compiled PDF
+- `src/` – graph construction and verification code
+- `results/` – generated graph data and SCC outputs
+ 
 ## Overview
 
 The paper studies the odd-to-odd dynamics of the Collatz map using
@@ -43,26 +53,14 @@ pip install networkx
 Clone the repository and run
 
 ```
-pip install networkx
 python src/build_G3.py
 python src/build_G4.py
+python src/verify_cycles.py
 ```
 
 The scripts construct the graphs and verify that the only directed cycles
 are constant exponent configurations.
 
-## Repository structure
-
-```
-src/
-    build_G3.py
-    build_G4.py
-    verify_cycles.py
-
-results/
-    G3_scc.txt
-    Gr_scc.txt
-```
 
 ## Reproducibility
 
