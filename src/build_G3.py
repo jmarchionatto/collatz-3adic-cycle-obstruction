@@ -144,7 +144,7 @@ def main() -> None:
     sanity_checks()
     graph = build_graph()
 
-    out_dir = Path("results")
+    out_dir = Path("../results")
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / "G3_graph.json"
     out_file.write_text(json.dumps(graph, indent=2))

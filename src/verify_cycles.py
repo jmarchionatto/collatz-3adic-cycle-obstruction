@@ -224,7 +224,7 @@ def main() -> None:
 
     and also printed to stdout.
     """
-    results_dir = Path("results")
+    results_dir = Path("../results")
     out_g3 = verify_g3(results_dir)
     out_g4 = verify_g4(results_dir)
 

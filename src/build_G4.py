@@ -198,7 +198,7 @@ def main() -> None:
 
     sanity_checks()
 
-    out_dir = Path("results")
+    out_dir = Path("../results")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     summary = []
