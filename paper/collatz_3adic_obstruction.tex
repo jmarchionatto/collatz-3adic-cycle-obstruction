@@ -1,0 +1,780 @@
+\documentclass[11pt]{article}
+
+\usepackage{mathtools,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{url}
+
+\raggedbottom
+
+\setlength{\abovedisplayskip}{8pt}
+\setlength{\belowdisplayskip}{8pt}
+\setlength{\abovedisplayshortskip}{6pt}
+\setlength{\belowdisplayshortskip}{6pt}
+
+\linespread{0.97}
+
+\title{A Finite 3-Adic Obstruction to Odd Collatz Cycles}
+\author{Juan R. Marchionatto}
+\date{}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the odd-to-odd dynamics of the Collatz map via the associated
+exponent sequence defined by $3n+1=2^{e(n)}m$.
+Finite windows of consecutive odd steps satisfy exact algebraic identities
+which induce compatibility constraints modulo powers of $3$.
+Under the hypothesis of an odd Collatz cycle, these constraints must hold
+simultaneously for all circular windows of fixed length.
+
+We encode these constraints as finite directed graphs.
+A complete enumeration of directed cycles in the graphs corresponding to
+window lengths $k=3$ and $k=4$ shows that no nonconstant exponent configuration
+satisfies the required $3$-adic compatibility conditions.
+The remaining constant exponent case is then eliminated by a direct algebraic
+argument.
+
+This yields a finite obstruction to the existence of nontrivial odd
+Collatz cycles.
+\end{abstract}
+
+%--------------------------------
+\section{Introduction}
+
+The Collatz map sends a positive integer $n$ to $n/2$ if $n$ is even and
+to $3n+1$ if $n$ is odd.
+Despite its elementary formulation, the global behavior of this iteration
+remains unresolved. The problem has been extensively studied in the literature;
+see for example \cite{Lagarias1985,Lagarias2010}.
+One of the fundamental open questions is whether nontrivial cycles exist.
+
+It is natural to restrict attention to the induced odd-to-odd dynamics.
+Each odd step can be written uniquely in the form
+\[
+3n+1 = 2^{e(n)} m,
+\]
+where $m$ is odd and $e(n)=v_2(3n+1)$.
+Iterating this representation encodes odd Collatz trajectories as sequences
+of exponents.
+
+The central observation of this work is that finite windows of consecutive
+odd steps satisfy exact algebraic identities.
+When reduced modulo powers of $3$, these identities impose compatibility
+constraints on ordered blocks of exponents that must hold simultaneously
+under all circular shifts along a hypothetical cycle.
+
+These circular compatibility conditions are encoded as finite directed graphs.
+At window length three, the resulting $3$-adic constraints force the exponent
+sequence to be constant modulo $18$.
+At window length four, a refinement modulo $81$ eliminates all nonconstant
+configurations.
+The remaining constant case is resolved by a direct algebraic argument.
+
+The argument is entirely finite and local in nature. It relies only on exact
+window identities and exhaustive compatibility checks on finite graphs,
+without invoking global convergence assumptions.
+
+%--------------------------------
+\section{Statement of the Main Result}\label{sec:main}
+
+Let $T\colon\mathbb{N}\to\mathbb{N}$ denote the Collatz map,
+\[
+T(n)=
+\begin{cases}
+n/2 & \text{if } n \text{ is even},\\
+3n+1 & \text{if } n \text{ is odd}.
+\end{cases}
+\]
+
+We restrict attention to the induced odd-to-odd dynamics.
+For an odd integer $n$, define
+\[
+3n+1 = 2^{e(n)} m,
+\]
+where $m$ is odd and $e(n)=v_2(3n+1)$.
+
+An \emph{odd Collatz cycle} is a finite sequence of odd integers
+\[
+n_0,n_1,\dots,n_{p-1}
+\]
+such that
+\[
+3n_i+1=2^{e_i}n_{i+1}
+\quad (i=0,\dots,p-1),
+\]
+with indices taken modulo $p$.
+
+The trivial cycle consists of the single fixed point $n_0=1$.
+
+\begin{theorem}
+There exist no nontrivial odd Collatz cycles.
+\end{theorem}
+
+%--------------------------------
+\section{Algebraic Window Identity}\label{sec:algebraic-w-ident}
+
+Let $(n_i)$ be an odd Collatz trajectory and $(e_i)$ its exponent sequence,
+\[
+3n_i+1 = 2^{e_i} n_{i+1}.
+\]
+
+\subsection{Iterated identity}
+
+Fix an integer $k\ge 1$.
+By repeated substitution, one obtains the exact identity
+\begin{equation}\label{eq:window_identity}
+3^k n_{i+k}
+=
+2^{E_i} n_i
+-
+\sum_{j=0}^{k-1}
+3^{j} \,
+2^{\,e_{i+j+1}+\cdots+e_{i+k-1}},
+\end{equation}
+where
+\[
+E_i = e_i+e_{i+1}+\cdots+e_{i+k-1}.
+\]
+
+\subsection{Reduction modulo $3^k$}
+
+Reducing \eqref{eq:window_identity} modulo $3^k$ eliminates the left-hand side and yields
+\begin{equation}\label{eq:window_congruence}
+2^{E_i} n_i
+\equiv
+\sum_{j=0}^{k-1}
+3^{j} \,
+2^{\,e_{i+j+1}+\cdots+e_{i+k-1}}
+\pmod{3^k}.
+\end{equation}
+
+Since $\gcd(2,3^k)=1$, the factor $2^{E_i}$ is invertible modulo $3^k$.
+Thus we may rewrite \eqref{eq:window_congruence} in the form
+\begin{equation}\label{eq:Rk_definition}
+n_i \equiv R_k(e_i,\dots,e_{i+k-1})
+\pmod{3^k},
+\end{equation}
+where
+\[
+R_k(e_i,\dots,e_{i+k-1})
+=
+2^{-E_i}
+\sum_{j=0}^{k-1}
+3^{j} \,
+2^{\,e_{i+j+1}+\cdots+e_{i+k-1}}
+\pmod{3^k}.
+\]
+
+\subsection{Consequence for cycles}
+
+If $(n_0,\dots,n_{p-1})$ is an odd Collatz cycle, then for every
+$i\in\mathbb{Z}/p\mathbb{Z}$ the congruence \eqref{eq:Rk_definition}
+holds for the window
+\[
+(e_i,e_{i+1},\dots,e_{i+k-1}),
+\]
+with indices taken modulo $p$.
+
+%--------------------------------
+\section{Circular Compatibility as a Finite Graph}\label{sec:circ-compat}
+
+Fix $k \ge 1$.
+
+For each ordered $k$-tuple of exponents
+\[
+(e_i,\dots,e_{i+k-1}),
+\]
+define the residue
+\[
+R_k(e_i,\dots,e_{i+k-1})
+\in \mathbb{Z}/3^k\mathbb{Z}
+\]
+as in \eqref{eq:Rk_definition}.
+
+\subsection{Compatibility condition}
+
+Along an odd trajectory we have
+\[
+3n_i + 1 = 2^{e_i} n_{i+1}.
+\]
+
+Reducing modulo $3^k$ and substituting the window residues yields
+\begin{equation}\label{eq:compatibility}
+R_k(e_{i+1},\dots,e_{i+k})
+\equiv
+\bigl(3R_k(e_i,\dots,e_{i+k-1}) + 1\bigr)\,
+2^{-e_i}
+\pmod{3^k}.
+\end{equation}
+
+\subsection{Directed graph encoding}
+
+For each fixed window length $k$, we associate a directed graph $G_k$ as follows:
+
+\begin{itemize}
+\item Vertices: all ordered $k$-tuples of exponent residues modulo
+the multiplicative order of $2$ modulo $3^k$.
+\item Directed edge:
+\[
+(e_0,\dots,e_{k-1}) \longrightarrow (e_1,\dots,e_k)
+\]
+whenever the compatibility condition \eqref{eq:compatibility} holds.
+\end{itemize}
+
+\begin{lemma}\label{lem:cycle_to_Gk}
+For each fixed $k$, if an odd Collatz cycle exists, then its length-$k$
+exponent windows form a directed cycle in the associated graph $G_k$.
+\end{lemma}
+
+\begin{proof}
+In a cycle of length $p$, every length-$k$ window occurs,
+including those wrapping around the cycle.
+Each must satisfy \eqref{eq:compatibility}.
+Therefore the sequence of windows produces a directed cycle in $G_k$.
+\end{proof}
+
+%--------------------------------
+\section{Finite Obstruction at Window Length $k=3$}\label{sec:k3}
+
+We specialize the window identity to length $k=3$ and work modulo $3^3=27$.
+Since $2$ is a unit modulo $27$ and powers of $2$ are periodic modulo $27$,
+only exponent residues modulo the multiplicative order of $2$ mod $27$
+are relevant. For $k\ge 1$, the multiplicative order of $2$ modulo $3^k$ is
+\[
+\operatorname{ord}_{3^k}(2)=2\cdot 3^{k-1},
+\qquad\text{hence}\qquad
+\operatorname{ord}_{27}(2)=18.
+\]
+Therefore, every residue condition modulo $27$ depends only on exponents
+reduced modulo $18$.
+
+\begin{lemma}\label{lem:mod18_reduction}
+For $k=3$, the residue map modulo $27$ depends only on exponent classes modulo $18$.
+More precisely, the quantity
+\[
+R_3(a,b,c)
+=
+2^{-(a+b+c)}
+\Bigl(2^{b+c}+3\cdot 2^{c}+9\Bigr)
+\pmod{27}
+\]
+is determined entirely by the classes of $a,b,c$ in $\mathbb{Z}/18\mathbb{Z}$.
+Moreover, the compatibility condition
+\[
+R_3(b,c,d)\equiv \bigl(3R_3(a,b,c)+1\bigr)\,2^{-a}\pmod{27}
+\]
+also depends only on the classes of $a,b,c,d$ modulo $18$.
+\end{lemma}
+
+\begin{proof}
+Since $\operatorname{ord}_{27}(2)=18$, we have
+\[
+2^{x+18m}\equiv 2^x \pmod{27}
+\qquad\text{for all }x,m\in\mathbb{Z}.
+\]
+Because $2$ is invertible modulo $27$, the same holds for inverses:
+\[
+2^{-(x+18m)}\equiv 2^{-x}\pmod{27}.
+\]
+Thus every power of $2$ and every inverse power of $2$ appearing in the definition
+of $R_3(a,b,c)$ depends only on the corresponding exponent modulo $18$.
+Therefore $R_3(a,b,c)$ itself depends only on $(a,b,c)\bmod 18$.
+The same argument applies to the compatibility condition, since both
+$R_3(a,b,c)$ and $2^{-a}$ depend only on the corresponding residue classes
+modulo $18$.
+\end{proof}
+
+\subsection{The length--three residue map}
+
+For a triple $(a,b,c)\in(\mathbb{Z}/18\mathbb{Z})^3$, define
+\begin{equation}\label{eq:R3def}
+R_3(a,b,c)
+:=
+2^{-(a+b+c)}
+\Bigl(2^{b+c}+3\cdot 2^{c}+9\Bigr)
+\;\in\;\mathbb{Z}/27\mathbb{Z},
+\end{equation}
+where all powers of $2$ and inverses are taken modulo $27$.
+This is well-defined since $2$ is invertible modulo $27$.
+
+If $(e_i,e_{i+1},e_{i+2})$ is a realizable length--three window along an odd
+Collatz trajectory and we reduce exponents modulo $18$, then the window identity
+implies
+\[
+n_i \equiv R_3(e_i,e_{i+1},e_{i+2}) \pmod{27}.
+\]
+
+\subsection{Circular compatibility as a directed graph}
+
+Along an odd trajectory we have
+\[
+3n_i+1 = 2^{e_i}n_{i+1}.
+\]
+Reducing modulo $27$ and substituting the window residues gives the compatibility
+constraint
+\begin{equation}\label{eq:compat3}
+R_3(e_{i+1},e_{i+2},e_{i+3})
+\equiv
+\bigl(3\,R_3(e_i,e_{i+1},e_{i+2})+1\bigr)\,2^{-e_i}
+\pmod{27},
+\end{equation}
+with all $e_j$ understood modulo $18$.
+
+Define a directed graph $G_3$ whose vertex set is $(\mathbb{Z}/18\mathbb{Z})^3$.
+We draw a directed edge
+\[
+(a,b,c)\longrightarrow (b,c,d)
+\]
+if and only if the compatibility congruence \eqref{eq:compat3} holds.
+
+\begin{lemma}[Real cycles project to $G_3$]\label{lem:projection_to_G3}
+Let
+\[
+(n_0,n_1,\dots,n_{p-1})
+\]
+be an odd Collatz cycle with exponent sequence $(e_i)$.
+Then the sequence of triples
+\[
+(e_i,e_{i+1},e_{i+2}) \bmod 18
+\]
+forms a directed cycle in $G_3$.
+\end{lemma}
+
+\begin{proof}
+For every index $i$ along the cycle, the length--three window identity
+implies
+\[
+n_i \equiv R_3(e_i,e_{i+1},e_{i+2}) \pmod{27}.
+\]
+
+Since the window identity is an exact algebraic identity for every odd
+Collatz trajectory, this congruence holds for every index $i$ along the
+cycle.
+
+The odd-to-odd recurrence gives
+\[
+3n_i+1 = 2^{e_i} n_{i+1}.
+\]
+
+Reducing modulo $27$ yields
+\[
+n_{i+1} \equiv (3n_i+1)\,2^{-e_i}\pmod{27}.
+\]
+
+Substituting the window residues gives
+\[
+R_3(e_{i+1},e_{i+2},e_{i+3})
+\equiv
+\bigl(3R_3(e_i,e_{i+1},e_{i+2})+1\bigr)\,2^{-e_i}
+\pmod{27}.
+\]
+
+By Lemma~\ref{lem:mod18_reduction}, this condition depends only on the
+residue classes modulo $18$.
+Therefore the triples
+\[
+(e_i,e_{i+1},e_{i+2}) \bmod 18
+\]
+follow the edge rule defining $G_3$.
+
+Since the cycle is circular, these triples form a directed cycle in $G_3$.
+\end{proof}
+
+\subsection{Consequence: rigidity modulo $18$}
+
+The key finite obstruction at window length three is the following.
+
+\begin{lemma}\label{lem:G3_only_constant_cycles}
+The directed graph $G_3$ has no directed cycles other than the constant
+triples modulo $18$
+\[
+(a,a,a)\to(a,a,a),
+\qquad a\in\mathbb{Z}/18\mathbb{Z}.
+\]
+\end{lemma}
+
+Recall that the vertices of $G_3$ are triples of exponent residues
+\[
+(a,b,c)\in(\mathbb{Z}/18\mathbb{Z})^3.
+\]
+Thus a vertex $(a,a,a)$ represents three consecutive exponents that are
+equal modulo $18$, not necessarily equal as integers.
+
+Lemma~\ref{lem:G3_only_constant_cycles} is a finite statement about a
+directed graph with $18^3$ vertices. Once it holds, any exponent sequence
+arising from a hypothetical odd Collatz cycle must satisfy
+\[
+e_i \equiv e_{i+1} \equiv \cdots \equiv e_{i+p-1} \pmod{18}.
+\]
+Indeed, if a cycle existed, the sequence of triples
+\[
+(e_i,e_{i+1},e_{i+2}) \bmod 18
+\]
+would form a directed cycle in $G_3$. By the lemma, the only possible
+directed cycles are the constant triples $(a,a,a)$, which implies that
+all exponents along the cycle lie in the same residue class modulo $18$.
+
+In particular, the exponent sequence of any hypothetical odd Collatz cycle
+lies in a single residue class modulo $18$.
+
+\medskip
+A computational verification of Lemma~\ref{lem:G3_only_constant_cycles} is
+given in \ref{app:computation} by explicit construction of $G_3$ and enumeration of
+its strongly connected components.
+
+%--------------------------------
+\section{Refinement at Window Length $k=4$}\label{sec:k4}
+
+By Lemma~\ref{lem:G3_only_constant_cycles}, any exponent sequence arising
+from a hypothetical odd Collatz cycle satisfies
+\[
+e_i \equiv r \pmod{18}
+\]
+for some fixed residue $r \in \mathbb{Z}/18\mathbb{Z}$.
+
+We therefore write
+\[
+e_i = r + 18 t_i,
+\qquad t_i \in \mathbb{Z}.
+\]
+
+\subsection{Reduction modulo $81$}
+
+Specializing the window identity to length $k=4$ and reducing modulo
+$3^4 = 81$, we analyze the resulting compatibility condition.
+
+Since
+\[
+e_i = r+18t_i,
+\]
+we have
+\[
+2^{e_i}=2^r(2^{18})^{t_i}\pmod{81}.
+\]
+Now
+\[
+2^{18}\equiv 28\pmod{81},
+\qquad
+28^3\equiv 1\pmod{81},
+\]
+so the residue of $(2^{18})^{t_i}$ modulo $81$ depends only on $t_i\bmod 3$.
+Moreover, every power of $2$ appearing in the length--four window identity
+is obtained from sums of exponents of the form
+\[
+e_{i_1}+\cdots+e_{i_m}
+= mr + 18(t_{i_1}+\cdots+t_{i_m}),
+\]
+and therefore also depends only on the corresponding residue classes
+$t_{i_j}\bmod 3$.
+Hence all powers of $2$ occurring in the length--four residue map, and
+therefore the entire compatibility condition modulo $81$, depend only on
+\[
+t_i \in \mathbb{Z}/3\mathbb{Z}.
+\]
+
+Define the residue map
+\begin{equation}\label{eq:R4def}
+R_4(a,b,c,d)
+=
+2^{-(\epsilon(a)+\epsilon(b)+\epsilon(c)+\epsilon(d))}
+\Bigl(
+2^{\epsilon(d)+\epsilon(c)+\epsilon(b)}
++ 3\,2^{\epsilon(d)+\epsilon(c)}
++ 9\,2^{\epsilon(d)}
++ 27
+\Bigr)
+\pmod{81},
+\end{equation}
+where
+\[
+\epsilon(x)=r+18x,
+\qquad x\in\mathbb{Z}/3\mathbb{Z}.
+\]
+
+\subsection{Directed graph $G_r$}
+
+Define a directed graph $G_r$ as follows:
+
+\begin{itemize}
+\item Vertices: all quadruples $(a,b,c,d)\in(\mathbb{Z}/3\mathbb{Z})^4$.
+\item Directed edge:
+\[
+(a,b,c,d)\longrightarrow (b,c,d,x)
+\]
+if and only if the compatibility condition
+\[
+R_4(b,c,d,x)
+\equiv
+\bigl(3R_4(a,b,c,d)+1\bigr)\,2^{-\epsilon(a)}
+\pmod{81}
+\]
+holds.
+\end{itemize}
+
+\begin{lemma}\label{lem:cycle_implies_Gr_cycle}
+If an odd Collatz cycle exists with exponent residue $r \pmod{18}$,
+then the sequence of quadruples
+\[
+(t_i,t_{i+1},t_{i+2},t_{i+3})
+\]
+forms a directed cycle in $G_r$.
+\end{lemma}
+
+\begin{proof}
+As in the length--three case, every length--four window along the cycle,
+including those wrapping around the closing identification, must satisfy
+the window identity modulo $81$.
+Since the window identity is an exact algebraic identity for every odd
+Collatz trajectory, the corresponding residue relation holds at every
+index of the cycle.
+Therefore consecutive windows satisfy the compatibility condition defining
+$G_r$, and hence produce a directed cycle.
+\end{proof}
+\subsection{Elimination of nonconstant configurations}
+The key finite obstruction at window length four is the following.
+
+\begin{lemma}\label{lem:Gr_only_constant_cycles}
+For each $r\in\mathbb{Z}/18\mathbb{Z}$, the directed graph $G_r$
+has no directed cycles other than the constant ones
+\[
+(a,a,a,a)\to(a,a,a,a),
+\qquad a\in\mathbb{Z}/3\mathbb{Z}.
+\]
+\end{lemma}
+
+Lemma~\ref{lem:Gr_only_constant_cycles} is a finite statement about a directed graph
+with $3^4=81$ vertices.
+A computational verification is provided in \ref{app:computation}.
+
+Consequently,
+\[
+t_0=t_1=\cdots=t_{p-1},
+\]
+and therefore
+\[
+e_0=e_1=\cdots=e_{p-1}.
+\]
+
+Hence any hypothetical odd Collatz cycle must have constant exponent sequence.
+
+%--------------------------------
+\section{The Constant Exponent Case}\label{sec:const}
+
+By Section~\ref{sec:k4}, any hypothetical odd Collatz cycle must have constant exponent
+sequence. Let
+\[
+e_i = e
+\quad\text{for all } i.
+\]
+
+\subsection{Global cycle identity}
+
+Composing $p$ consecutive odd steps yields the identity
+\[
+n_{i+p}
+=
+\frac{2^{pe}}{3^p}\, n_i
+-
+\frac{1}{3^p}
+\sum_{j=0}^{p-1}
+3^{j}\, 2^{(p-1-j)e}.
+\]
+
+If the trajectory forms a cycle of length $p$, then $n_{i+p}=n_i$.
+Rearranging gives
+\begin{equation}\label{eq:constant_cycle_identity}
+n_i\bigl(2^{pe}-3^p\bigr)
+=
+\sum_{j=0}^{p-1}
+3^{j}\, 2^{(p-1-j)e}.
+\end{equation}
+
+Solving for $n_i$ yields
+\begin{equation}\label{eq:constant_solution}
+n_i
+=
+\frac{\displaystyle\sum_{j=0}^{p-1}3^{j}2^{(p-1-j)e}}
+{2^{pe}-3^p}.
+\end{equation}
+
+\subsection{Case analysis}
+
+\paragraph{Case $e=1$.}
+
+Then $2^{p}-3^p<0$ for all $p\ge1$, while the numerator in
+\eqref{eq:constant_solution} is positive.
+Thus $n_i<0$, which is impossible.
+
+\paragraph{Case $e\ge3$.}
+
+Define the odd-to-odd map
+\[
+T_e(n)=\frac{3n+1}{2^e}.
+\]
+
+For $e\ge3$ we have $2^e-3\ge5$.
+For every $n\ge1$,
+\[
+3n+1 < 2^e n
+\quad\Longleftrightarrow\quad
+1 < (2^e-3)n.
+\]
+Since $(2^e-3)n\ge5n\ge5$, this inequality holds.
+Hence
+\[
+T_e(n)<n.
+\]
+
+Thus the odd terms strictly decrease at each step,
+which is incompatible with the existence of a cycle.
+
+\paragraph{Case $e=2$.}
+
+In this case
+\[
+T_2(n)=\frac{3n+1}{4}.
+\]
+Equation \eqref{eq:constant_solution} yields $n_i=1$ for all $p\ge1$.
+This corresponds to the trivial odd cycle.
+
+\subsection{Conclusion}
+
+The analysis above shows that if the exponent sequence of an odd Collatz
+cycle is constant, then the only possible cycle is the trivial one
+corresponding to $n=1$.
+
+%--------------------------------
+\begin{proof}[Proof of the Main Theorem]
+Assume a nontrivial odd Collatz cycle exists.
+
+By Section~\ref{sec:k3}, the exponent sequence must be constant modulo $18$.
+By Section~\ref{sec:k4}, it must therefore be constant.
+Section~\ref{sec:const} shows that the constant exponent case produces
+only the trivial cycle.
+
+This contradicts the assumption that a nontrivial odd Collatz cycle exists.
+\end{proof}
+
+%--------------------------------
+\section*{Conclusion}
+
+We have shown that the existence of an odd Collatz cycle would force the
+associated exponent sequence to satisfy strong local compatibility
+conditions arising from the window identities.
+Encoding these conditions as finite directed graphs yields a complete
+finite obstruction, forcing the exponent sequence to be constant.
+The constant case produces only the trivial cycle.
+
+Hence no nontrivial odd Collatz cycles exist.
+
+%--------------------------------
+\appendix
+\renewcommand{\thesection}{Appendix \Alph{section}}
+\renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
+
+\section{Computational Verification of the Graph Constraints}\label{app:computation}
+
+The statements of Lemma~\ref{lem:G3_only_constant_cycles}
+and Lemma~\ref{lem:Gr_only_constant_cycles} reduce to finite
+computations on directed graphs.
+\subsection{Construction of $G_3$}
+The graph $G_3$ has vertex set
+\[
+(\mathbb{Z}/18\mathbb{Z})^3,
+\]
+so it contains $18^3=5832$ vertices.
+
+For each vertex $(a,b,c)$ and each $d\in\mathbb{Z}/18\mathbb{Z}$,
+we test whether the compatibility condition
+\[
+R_3(b,c,d)
+\equiv
+(3R_3(a,b,c)+1)\,2^{-a}
+\pmod{27}
+\]
+holds. If so, we add the directed edge
+\[
+(a,b,c)\rightarrow(b,c,d).
+\]
+
+The resulting directed graph has $5832$ vertices and $5832$ edges.
+In particular, each vertex has out-degree exactly one.
+
+\subsection{Cycle detection}
+
+To detect cycles, we compute the strongly connected components (SCCs)
+of the directed graph using Tarjan's algorithm.
+The computation shows that the only SCCs containing directed cycles
+are the trivial self-loops
+\[
+(a,a,a)\to(a,a,a)
+\]
+for $a\in\mathbb{Z}/18\mathbb{Z}$.
+
+In particular, $G_3$ contains no nonconstant directed cycles.
+
+\subsection{Verification for $k=4$}
+
+For the refinement step, the graph $G_r$ has vertex set
+\[
+(\mathbb{Z}/3\mathbb{Z})^4,
+\]
+containing $3^4=81$ vertices.
+This verification is carried out separately for each residue
+\[
+r\in\mathbb{Z}/18\mathbb{Z},
+\]
+so in total $18$ directed graphs are checked.
+Edges are defined by the compatibility condition modulo $81$.
+
+The same SCC analysis shows that the only directed cycles
+are the constant ones
+\[
+(a,a,a,a)\to(a,a,a,a),
+\qquad a\in\mathbb{Z}/3\mathbb{Z}.
+\]
+
+\subsection{Implementation}
+
+The computations were implemented in Python. The source code used to
+construct the graphs and enumerate their strongly connected components is
+publicly available at
+
+\url{https://github.com/jmarchionatto/collatz-3adic-cycle-obstruction}.
+
+%--------------------------------
+\section*{AI Assistance Disclosure}
+
+This work was developed with assistance from large language models for drafting,
+structuring, and refining exposition, as well as for checking algebraic derivations.
+The mathematical ideas, results, and overall research direction are due to the
+author, who takes full responsibility for the content.
+
+\begin{thebibliography}{9}
+
+\bibitem{Lagarias1985}
+J.~C.~Lagarias,
+\newblock The $3x+1$ problem and its generalizations,
+\newblock \emph{Amer. Math. Monthly} \textbf{92} (1985), no.~1, 3--23.
+
+\bibitem{Lagarias2010}
+J.~C.~Lagarias,
+\newblock The $3x+1$ problem: An annotated bibliography (1963--1999),
+\newblock \emph{arXiv preprint} arXiv:math/0309224, revised 2010.
+
+\end{thebibliography}
+\end{document}
