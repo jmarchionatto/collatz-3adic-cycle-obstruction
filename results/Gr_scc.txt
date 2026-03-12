@@ -1,0 +1,20 @@
+G4 verification
+r=0: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=1: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=2: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=3: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=4: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=5: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=6: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=7: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=8: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=9: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=10: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=11: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=12: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=13: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=14: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=15: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=16: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+r=17: nodes=81, edges=81, constant_loops=3, nonconstant_cycles=0
+Total nonconstant cycles across all r: 0
