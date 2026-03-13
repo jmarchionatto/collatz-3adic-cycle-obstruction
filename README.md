@@ -1,8 +1,10 @@
 # Collatz 3-adic Cycle Obstruction
 
-This repository contains the code accompanying the paper
+Computational verification code accompanying the paper
 
-`A Finite 3-Adic Obstruction to Odd Collatz Cycles`.
+[A Finite 3-Adic Obstruction to Odd Collatz Cycles](https://zenodo.org/records/18991641)
+
+Zenodo record: https://zenodo.org/records/18991641
 
 The scripts construct the finite directed graphs arising from the
 modular compatibility conditions in the paper and verify the structure
